@@ -10,6 +10,7 @@
 #include "urg_errno.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <unistd.h>
 
 #undef max
 #undef min
