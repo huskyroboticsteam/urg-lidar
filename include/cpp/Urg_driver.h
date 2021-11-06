@@ -116,7 +116,7 @@ namespace qrk
         Urg_driver& operator = (const Urg_driver& rhs);
 
         struct pImpl;
-        std::auto_ptr<pImpl> pimpl;
+        std::unique_ptr<pImpl> pimpl;
     };
 }
 
