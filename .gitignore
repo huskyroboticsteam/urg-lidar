@@ -19,3 +19,4 @@
 *.so
 urg_c-config
 urg_cpp-config
+/build/
