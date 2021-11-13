@@ -37,6 +37,10 @@ install(TARGETS urg_c urg_cpp
   EXPORT urg-targets
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(DIRECTORY include/c/
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/urg_c)
+install(DIRECTORY include/cpp/
+  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/urg_cpp)
 
 install(EXPORT urg-targets
   FILE URGLidarTargets.cmake
