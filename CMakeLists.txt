@@ -4,7 +4,7 @@ include(CMakePackageConfigHelpers)
 
 project(URGLidar
   LANGUAGES C CXX
-  VERSION 1.2.5)
+  VERSION 1.2.5.2)
 
 set(C_FILES
   src/urg_connection.c
@@ -55,5 +55,26 @@ configure_package_config_file(
 install(FILES
   "${CMAKE_CURRENT_BINARY_DIR}/URGLidarConfig.cmake"
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/URGLidar)
+
+# Borrowed/adapted from https://www.scivision.dev/cmake-cpack-basic/
+set(CPACK_GENERATOR "DEB")
+set(CPACK_PACKAGE_NAME "urg-lidar")
+# Version format: major.minor.patch-tweak
+set(CPACK_PACKAGE_VERSION "${CMAKE_PROJECT_VERSION_MAJOR}.${CMAKE_PROJECT_VERSION_MINOR}.${CMAKE_PROJECT_VERSION_PATCH}-${CMAKE_PROJECT_VERSION_TWEAK}")
+set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION})
+set(CPACK_PACKAGE_CONTACT "Husky Robotics Team <uwrobots@uw.edu>")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+set(CPACK_PACKAGE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
+# not .gitignore as its regex syntax is distinct
+file(READ ${CMAKE_CURRENT_LIST_DIR}/cmake/.cpack_ignore _cpack_ignore)
+string(REGEX REPLACE "\n" ";" _cpack_ignore ${_cpack_ignore})
+set(CPACK_SOURCE_IGNORE_FILES "${_cpack_ignore}")
+
+install(FILES ${CPACK_RESOURCE_FILE_README} ${CPACK_RESOURCE_FILE_LICENSE}
+  DESTINATION share/docs/${PROJECT_NAME})
+
+include(CPack)
 
 endif()

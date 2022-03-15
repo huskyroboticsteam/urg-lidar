@@ -1,0 +1,7 @@
+\\.git/
+\\.git*
+samples/
+build*/
+doc/
+.editorconfig
+.gdbinit
